@@ -8,6 +8,8 @@ namespace _Project
     public class UpdateCharacterData : MonoBehaviour
     {
         [SerializeField] private List<CharacterSO> characterSoList;
+        
+        public List<CharacterSO> GetCharacterList() => characterSoList;
 
         public void UpdateCharacter(List<CharacterInfo> characterInfoList)
         {
