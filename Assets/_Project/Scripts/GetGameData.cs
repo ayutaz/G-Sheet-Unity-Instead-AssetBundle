@@ -20,6 +20,7 @@ namespace _Project
             else
             {
                 var json = request.downloadHandler.text;
+                Debug.Log("json: " + json);
                 var data = JsonUtility.FromJson<T>(json);
                 return data;
             }
