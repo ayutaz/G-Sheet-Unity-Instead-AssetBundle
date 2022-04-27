@@ -8,34 +8,39 @@ namespace _Project
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private CharacterDataHandler characterDataHandler;
+        private CharacterDataModel _characterDataModel;
         [SerializeField] private UpdateCharacterInfoView updateCharacterInfoView;
         [SerializeField] private TMP_Dropdown dropdown;
         [SerializeField] private GameStatusView gameStatusView;
+
+        private void Awake()
+        {
+            _characterDataModel = new CharacterDataModel();
+        }
 
         private async void Start()
         {
             gameStatusView.UpdateStatus("get character data for spreadsheet");
             var characterData = await GetGameData.GetGameInfo<CharacterInfoList>();
             gameStatusView.UpdateStatus("update character scriptable object");
-            characterDataHandler.UpdateCharacter(characterData.gameInfo);
-            UpdateDropdownCharacterInfo(characterDataHandler.GetCharacterList());
+            _characterDataModel.CharacterInfoList = characterData.gameInfo;
+            UpdateDropdownCharacterInfo(_characterDataModel.CharacterInfoList);
             dropdown.interactable = true;
             gameStatusView.UpdateStatus("done update character");
 
             dropdown.ObserveEveryValueChanged(value => value.value)
                 .Subscribe(selectCharacterIndex =>
                 {
-                    var selectCharacterData = characterDataHandler.GetCharacterList()[selectCharacterIndex].CharacterInfo;
-                    CharacterDataHandler.CharacterDataDebugLog(selectCharacterData);
+                    var selectCharacterData = _characterDataModel.CharacterInfoList[selectCharacterIndex];
+                    CharacterDataModel.CharacterDataDebugLog(selectCharacterData);
                     updateCharacterInfoView.UpdateInfoView(selectCharacterData);
                 }).AddTo(this);
         }
 
-        private void UpdateDropdownCharacterInfo(IEnumerable<CharacterSO> characterSoList)
+        private void UpdateDropdownCharacterInfo(IEnumerable<CharacterInfo> characterInfoList)
         {
             dropdown.options.Clear();
-            dropdown.options = characterSoList.Select(characterSo => new TMP_Dropdown.OptionData(characterSo.name)).ToList();
+            dropdown.options = characterInfoList.Select(characterSo => new TMP_Dropdown.OptionData(characterSo.name)).ToList();
         }
     }
 }
