@@ -1335,7 +1335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3adcf0a4aeae45f08410c3b49053d1c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updateCharacterData: {fileID: 718366537}
+  characterDataHandler: {fileID: 718366537}
   updateCharacterInfoView: {fileID: 396805103}
   dropdown: {fileID: 1925486218}
   gameStatusView: {fileID: 1461000464}

@@ -5,10 +5,10 @@ using UnityEngine;
 
 namespace _Project
 {
-    public class UpdateCharacterData : MonoBehaviour
+    public class CharacterDataHandler : MonoBehaviour
     {
         [SerializeField] private List<CharacterSO> characterSoList;
-        
+
         public List<CharacterSO> GetCharacterList() => characterSoList;
 
         public void UpdateCharacter(List<CharacterInfo> characterInfoList)
@@ -25,6 +25,11 @@ namespace _Project
                     character.CharacterInfo.uuid = characterInfoList[index].uuid;
                 });
             }
+        }
+
+        public static void CharacterDataDebugLog(CharacterInfo characterInfo)
+        {
+            Debug.Log("name : " + characterInfo.name + ", atk : " + characterInfo.atk + ", def : " + characterInfo.def + ", hp : " + characterInfo.hp + ", mp : " + characterInfo.mp);
         }
     }
 }
