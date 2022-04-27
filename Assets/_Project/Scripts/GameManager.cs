@@ -5,10 +5,12 @@ namespace _Project
     public class GameManager : MonoBehaviour
     {
         private readonly GetGameData _gameData = new GetGameData();
+        [SerializeField] private UpdateCharacterData updateCharacterData;
 
-        private void Start()
+        private async void Start()
         {
-            Debug.Log(GetGameData.GetGameInfo<CharacterInfo>());
+            var characterData = await GetGameData.GetGameInfo<CharacterInfoList>();
+            updateCharacterData.UpdateCharacter(characterData.gameInfo);
         }
     }
 }
