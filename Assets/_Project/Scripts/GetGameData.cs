@@ -7,10 +7,11 @@ namespace _Project
     public class GetGameData
     {
         private const string URL = "https://script.google.com/macros/s/AKfycbzCE73w6cqR7-sk6a3YQ_eIsVMlkt-2uULV7N0hPpRQnXG5A0-IpgIlMz3EBwY9fwC0bw/exec";
+        private const string SheetName = "gameInfo";
 
-        public async UniTask<T> GetGameInfo<T>()
+        public static async UniTask<T> GetGameInfo<T>()
         {
-            var request = UnityWebRequest.Get($"{URL}?sheetName=gameInfo");
+            var request = UnityWebRequest.Get($"{URL}?sheetName={SheetName}");
             await request.SendWebRequest();
             if (request.result is UnityWebRequest.Result.ConnectionError or UnityWebRequest.Result.ProtocolError or UnityWebRequest.Result.DataProcessingError)
             {
@@ -19,7 +20,6 @@ namespace _Project
             else
             {
                 var json = request.downloadHandler.text;
-                Debug.Log($"data:{json}");
                 var data = JsonUtility.FromJson<T>(json);
                 return data;
             }

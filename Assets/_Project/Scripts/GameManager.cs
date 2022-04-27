@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace _Project
 {
@@ -9,7 +8,7 @@ namespace _Project
 
         private void Start()
         {
-            Debug.Log(_gameData.GetGameInfo<CharacterInfo>());
+            Debug.Log(GetGameData.GetGameInfo<CharacterInfo>());
         }
     }
 }
