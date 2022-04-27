@@ -8,7 +8,6 @@ namespace _Project
 {
     public class GameManager : MonoBehaviour
     {
-        private readonly GetGameData _gameData = new GetGameData();
         [SerializeField] private CharacterDataHandler characterDataHandler;
         [SerializeField] private UpdateCharacterInfoView updateCharacterInfoView;
         [SerializeField] private TMP_Dropdown dropdown;

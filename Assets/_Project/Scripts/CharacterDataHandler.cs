@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace _Project
@@ -15,15 +14,12 @@ namespace _Project
         {
             foreach (var (character, index) in characterSoList.Select((info, index) => (info, index)))
             {
-                UniTask.RunOnThreadPool(() =>
-                {
-                    character.CharacterInfo.name = characterInfoList[index].name;
-                    character.CharacterInfo.atk = characterInfoList[index].atk;
-                    character.CharacterInfo.def = characterInfoList[index].def;
-                    character.CharacterInfo.hp = characterInfoList[index].hp;
-                    character.CharacterInfo.mp = characterInfoList[index].mp;
-                    character.CharacterInfo.uuid = characterInfoList[index].uuid;
-                });
+                character.CharacterInfo.name = characterInfoList[index].name;
+                character.CharacterInfo.atk = characterInfoList[index].atk;
+                character.CharacterInfo.def = characterInfoList[index].def;
+                character.CharacterInfo.hp = characterInfoList[index].hp;
+                character.CharacterInfo.mp = characterInfoList[index].mp;
+                character.CharacterInfo.uuid = characterInfoList[index].uuid;
             }
         }
 
