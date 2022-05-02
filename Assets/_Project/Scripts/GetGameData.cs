@@ -6,7 +6,7 @@ namespace _Project
 {
     public class GetGameData
     {
-        private const string URL = "url";
+        private const string URL = "https://script.google.com/macros/s/AKfycbzCE73w6cqR7-sk6a3YQ_eIsVMlkt-2uULV7N0hPpRQnXG5A0-IpgIlMz3EBwY9fwC0bw/exec";
         private const string SheetName = "gameInfo";
 
         public static async UniTask<T> GetGameInfo<T>()

@@ -8,30 +8,24 @@ namespace _Project
 {
     public class GameManager : MonoBehaviour
     {
-        private CharacterDataModel _characterDataModel;
+        [SerializeField] private Character character;
         [SerializeField] private UpdateCharacterInfoView updateCharacterInfoView;
         [SerializeField] private TMP_Dropdown dropdown;
         [SerializeField] private GameStatusView gameStatusView;
-
-        private void Awake()
-        {
-            _characterDataModel = new CharacterDataModel();
-        }
-
         private async void Start()
         {
             gameStatusView.UpdateStatus("get character data for spreadsheet");
             var characterData = await GetGameData.GetGameInfo<CharacterInfoList>();
             gameStatusView.UpdateStatus("update character scriptable object");
-            _characterDataModel.CharacterInfoList = characterData.gameInfo;
-            UpdateDropdownCharacterInfo(_characterDataModel.CharacterInfoList);
+            character.characterInfoList = characterData.gameInfo;
+            UpdateDropdownCharacterInfo(character.characterInfoList);
             dropdown.interactable = true;
             gameStatusView.UpdateStatus("done update character");
 
             dropdown.ObserveEveryValueChanged(value => value.value)
                 .Subscribe(selectCharacterIndex =>
                 {
-                    var selectCharacterData = _characterDataModel.CharacterInfoList[selectCharacterIndex];
+                    var selectCharacterData = character.characterInfoList[selectCharacterIndex];
                     CharacterDataModel.CharacterDataDebugLog(selectCharacterData);
                     updateCharacterInfoView.UpdateInfoView(selectCharacterData);
                 }).AddTo(this);
